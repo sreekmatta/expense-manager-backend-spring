@@ -26,7 +26,7 @@ public class UserController {
 
 	}
 
-	@GetMapping("/api/user/create")
+	@PostMapping("/api/user/create")
 	public ResponseEntity createUser(@RequestBody User user) {
 		if(userRepository.save(user) != null) {;
 			return ResponseEntity.ok(HttpStatus.OK);
