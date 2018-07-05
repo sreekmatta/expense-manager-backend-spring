@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import com.expensegator.demo.models.User;
 import com.expensegator.demo.repositories.UserRepository;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class UserController {
 
 	@Autowired
@@ -28,7 +30,7 @@ public class UserController {
 
 	@PostMapping("/api/user/create")
 	public ResponseEntity<HttpStatus> createUser(@RequestBody User user) {
-		if(userRepository.save(user) != null) {;
+		if(userRepository.save(user) != null) {
 			return ResponseEntity.ok(HttpStatus.OK);
 		} 
 		return ResponseEntity.ok(HttpStatus.BAD_REQUEST);

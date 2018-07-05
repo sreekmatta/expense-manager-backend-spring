@@ -25,7 +25,8 @@ public class Expense {
 	private int id;
 	private String ename;
 	private ExpenseType expenseType;
-
+	private double amount;  
+	
 	@ManyToMany
     @JoinColumn(name = "id")
 	private Collection<User> payers;
@@ -107,4 +108,11 @@ public class Expense {
 		this.group = group;
 	}
 
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
 }
