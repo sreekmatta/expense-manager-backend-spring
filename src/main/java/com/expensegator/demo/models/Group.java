@@ -1,24 +1,43 @@
 package com.expensegator.demo.models;
 
-import java.sql.Timestamp;
-import java.util.List;
+import java.util.Collection;
+import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
+@Table(name="expense_group")  
+@Entity
 public class Group {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int groupname;
-	private List<User> members;
+	
+	@OneToMany
+    @JoinColumn(name = "id")
+	private Collection<User> members;
+	
+	@OneToOne
+	@JoinColumn(name = "id")
 	private User createdByUser;
-	@Temporal(TemporalType.TIMESTAMP)
-	private Timestamp createdDate;
 
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date createdDate;
+
+	@OneToMany
+	@JoinColumn(name = "id")
+	private Collection<Expense> expenses;
+	
 	public int getId() {
 		return id;
 	}
@@ -35,11 +54,21 @@ public class Group {
 		this.groupname = groupname;
 	}
 
-	public List<User> getMembers() {
+	public Collection<User> getMembers() {
 		return members;
 	}
 
-	public void setMembers(List<User> members) {
+
+
+	public Collection<Expense> getExpenses() {
+		return expenses;
+	}
+
+	public void setExpenses(Collection<Expense> expenses) {
+		this.expenses = expenses;
+	}
+
+	public void setMembers(Collection<User> members) {
 		this.members = members;
 	}
 
@@ -51,11 +80,11 @@ public class Group {
 		this.createdByUser = createdByUser;
 	}
 
-	public Timestamp getCreatedDate() {
+	public Date getCreatedDate() {
 		return createdDate;
 	}
 
-	public void setCreatedDate(Timestamp createdDate) {
+	public void setCreatedDate(Date createdDate) {
 		this.createdDate = createdDate;
 	}
 
