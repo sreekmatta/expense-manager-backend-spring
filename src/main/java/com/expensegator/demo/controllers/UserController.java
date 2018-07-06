@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.expensegator.demo.models.User;
@@ -24,8 +25,12 @@ public class UserController {
 	UserRepository userRepository;
 
 	@PostMapping("/api/login")
-	public void loginUser() {
-
+	public ResponseEntity<HttpStatus> loginUser(@RequestParam("email") String email, @RequestParam("password") String password) {
+		List<User> users = userRepository.findUserByCredentials(email, password);
+		if(!users.isEmpty()) {
+			return ResponseEntity.ok(HttpStatus.OK);
+		}
+		return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
 	}
 
 	@PostMapping("/api/user/create")
