@@ -1,9 +1,13 @@
 package com.expensegator.demo.models;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Table(name = "user")
@@ -16,6 +20,11 @@ public class User {
 	private String password;
 	private String firstname;
 	private String lastname;
+
+	@OneToMany
+    @JoinColumn(name = "id")
+	private Collection<User> friendRequest;
+	
 
 	public int getId() {
 		return id;
@@ -56,5 +65,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
 
 }
