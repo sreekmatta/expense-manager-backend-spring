@@ -12,6 +12,6 @@ import com.expensegator.demo.models.FriendRequest;
 @Service
 public interface FriendRequestRepository extends JpaRepository<FriendRequest, Integer>{
 	
-	@Query("SELECT f FROM friend_request f WHERE f.sent_from_id like :senderId")
+	@Query("SELECT f FROM FriendRequest f WHERE f.sentFrom like :senderId")
 	public List<FriendRequest> findSendRequestsById(@Param("senderId") int senderId);
 }
