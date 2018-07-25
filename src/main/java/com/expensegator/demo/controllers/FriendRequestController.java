@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.expensegator.demo.models.FriendRequest;
+import com.expensegator.demo.models.User;
 import com.expensegator.demo.repositories.FriendRequestRepository;
 
 @RestController
@@ -32,9 +34,11 @@ public class FriendRequestController {
 		return ResponseEntity.ok(HttpStatus.BAD_REQUEST);
 	}
 	
-	@PostMapping("/api/friend/send/request/{id}")
+	@GetMapping("/api/friend/send/request/{id}")
 	public List<FriendRequest> findSendRequestsById(@PathVariable int id) {
-		return friendRequestRepository.findSendRequestsById(id);
+		User senderUser = new User();
+		senderUser.setId(id);
+		return friendRequestRepository.findSendRequestsById(senderUser);
 	}
 
 }

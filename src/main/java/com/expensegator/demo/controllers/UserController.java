@@ -67,7 +67,7 @@ public class UserController {
 		return userRepository.findById(id);
 	}
 
-	@GetMapping("api/user")
+	@GetMapping("/api/user")
 	public List<User> findAllUsers() {
 		return userRepository.findAll();
 	}

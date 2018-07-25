@@ -8,10 +8,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.expensegator.demo.models.FriendRequest;
+import com.expensegator.demo.models.User;
 
 @Service
 public interface FriendRequestRepository extends JpaRepository<FriendRequest, Integer>{
 	
 	@Query("SELECT f FROM FriendRequest f WHERE f.sentFrom like :senderId")
-	public List<FriendRequest> findSendRequestsById(@Param("senderId") int senderId);
+	public List<FriendRequest> findSendRequestsById(@Param("senderId") User senderId);
 }

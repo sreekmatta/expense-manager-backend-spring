@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -27,11 +28,11 @@ public class Expense {
 	private ExpenseType expenseType;
 	private double amount;  
 	
-	@ManyToMany
+	@OneToMany
     @JoinColumn(name = "id")
 	private Collection<User> payers;
 
-	@ManyToMany
+	@OneToMany
     @JoinColumn(name = "id")
 	private Collection<User> peopleInvolved;
 
@@ -39,10 +40,6 @@ public class Expense {
 	private Date dateCreated;
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateUpdated;
-
-	@OneToOne
-    @JoinColumn(name = "id")
-	private Group group;
 
 	public int getId() {
 		return id;
@@ -98,14 +95,6 @@ public class Expense {
 
 	public void setDateUpdated(Date dateUpdated) {
 		this.dateUpdated = dateUpdated;
-	}
-
-	public Group getGroup() {
-		return group;
-	}
-
-	public void setGroup(Group group) {
-		this.group = group;
 	}
 
 	public double getAmount() {
